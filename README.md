@@ -29,10 +29,6 @@ username, and password, then choose **Connect**. While connecting, use
 **Cancel** to stop the attempt. When connected, the button becomes
 **Disconnect**. The server can be entered as a hostname or an HTTPS URL.
 
-If you used the earlier local proof of concept, disable its widget first with
-`omarchy plugin disable local.cisco-vpn`. The installed widget uses the same
-`Omarchy Cisco VPN` NetworkManager profile, so your saved server and username
-remain available. Do not enable both widgets at the same time.
 
 ## Remove
 
