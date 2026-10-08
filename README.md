@@ -24,10 +24,11 @@ install the dependencies in a terminal instead:
 omarchy pkg add networkmanager-openconnect python-gobject
 ```
 
-Then open the widget again. Enter the HTTPS VPN server,
-username, and password, then choose **Connect**. While connecting, use
-**Cancel** to stop the attempt. When connected, the button becomes
-**Disconnect**. The server can be entered as a hostname or an HTTPS URL.
+Then open the widget again. Choose a gateway, or enter an HTTPS VPN server,
+username, and password, then choose **Connect**. Leave the password blank to
+use the copy in the login keyring. While connecting, use **Cancel** to stop
+the attempt. When connected, the button becomes **Disconnect**. The server
+can be entered as a hostname or an HTTPS URL.
 
 
 ## Remove
@@ -47,17 +48,25 @@ profile may also be used by an earlier local version of this widget.
 The server and username are stored in the NetworkManager profile; autoconnect
 is disabled. The password is sent over stdin to OpenConnect for one
 authentication attempt and is not saved in the profile or passed as a command
-argument. A short-lived session cookie is passed through NetworkManager's
-in-memory profile and cleared after the attempt. The popup does not print raw
-OpenConnect errors because those may contain sensitive details. The helper
-stops a subprocess if its combined output exceeds 1 MiB. Never commit
-your VPN server details, credentials, NetworkManager profile, or logs to this
-repository.
+argument. If **Remember password in the keyring** is checked, the password is
+written to the login keyring only after the gateway accepts it. **Save it for
+all gateways** stores that same password for every profile listed in
+`~/.config/omarchy/cisco-vpn-profiles.json`. Leave the password blank later
+to reuse the saved one. Uncheck **Save it for all gateways** to update only
+the selected profile. A short-lived session cookie is passed through
+NetworkManager's in-memory profile and cleared after the attempt. The popup
+does not print raw OpenConnect errors because those may contain sensitive
+details. The helper stops a subprocess if its combined output exceeds 1 MiB.
+Never commit your VPN server details, credentials, NetworkManager profile, or
+logs to this repository.
 
-This initial release supports a single Cisco AnyConnect username/password
-flow. VPN groups, OTP/MFA prompts, browser SSO, client certificates, and
-custom certificate trust are not supported. Certificate validation is never
-disabled. A successful login depends on your gateway's authentication policy.
+A JSON list at `~/.config/omarchy/cisco-vpn-profiles.json` can prefill
+gateways. That file stays on the machine and is not part of this repository.
+The popup can connect with a saved password, and the server, username, and
+password stay behind a disclosure. VPN groups, OTP/MFA prompts, browser SSO,
+client certificates, and custom certificate trust are not supported.
+Certificate validation is never disabled. A successful login depends on your
+gateway's authentication policy.
 
 ## Development
 
